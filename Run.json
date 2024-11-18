@@ -1,0 +1,15 @@
+{
+  "name": "terminal-2vd",
+  "version": "1.0.0",
+  "description": "A terminal-based video player using ASCII art and Node.js",
+  "main": "run.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "asciify-image": "^1.3.0",
+    "readline": "1.3.0"
+  },
+  "author": "piotraXc \ chatgpt 4.0",
+  "license": "MIT"
+}
