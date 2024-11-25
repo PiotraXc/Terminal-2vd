@@ -1,23 +1,22 @@
+### 3. `index.js`
+This is the main JavaScript file where the conversion and playback happen.
+
+```javascript
 const fs = require('fs');
 const { exec } = require('child_process');
 const asciify = require('asciify-image');
 const readline = require('readline');
 
+const videoPath = 'path/to/video.mp4'; // Replace with your video file path
 const framesDir = './frames';
 
 // Create frames directory if it doesn't exist
 if (!fs.existsSync(framesDir)) fs.mkdirSync(framesDir);
 
-// Set up readline interface for user input
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
-
 // Function to extract frames using FFmpeg
-const extractFrames = (videoPath) => {
+const extractFrames = () => {
   return new Promise((resolve, reject) => {
-    exec(`ffmpeg -i "${videoPath}" -vf "fps=10" ${framesDir}/frame%03d.png`, (error) => {
+    exec(`ffmpeg -i ${videoPath} -vf "fps=10" ${framesDir}/frame%03d.png`, (error) => {
       if (error) reject(error);
       else resolve();
     });
@@ -41,13 +40,7 @@ const playAsciiVideo = async () => {
   }
 };
 
-// Prompt user to enter video path
-rl.question('Enter the path to your video file: ', (videoPath) => {
-  extractFrames(videoPath)
-    .then(() => {
-      console.log('Frames extracted successfully. Playing video...');
-      return playAsciiVideo();
-    })
-    .catch(error => console.error("Error:", error))
-    .finally(() => rl.close());
-});
+// Extract frames and play video
+extractFrames()
+  .then(() => playAsciiVideo())
+  .catch(error => console.error("Error:", error));
