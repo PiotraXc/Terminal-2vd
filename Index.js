@@ -7,7 +7,7 @@ const { exec } = require('child_process');
 const asciify = require('asciify-image');
 const readline = require('readline');
 
-const videoPath = 'path/to/video.mp4'; // Replace with your video file path
+const videoPath = 'storage/'; 
 const framesDir = './frames';
 
 // Create frames directory if it doesn't exist
